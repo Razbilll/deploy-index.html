@@ -1,4 +1,4 @@
-@NonCPS
+
 pipeline {
     agent any
     stages {
