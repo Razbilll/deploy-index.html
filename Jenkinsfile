@@ -12,7 +12,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.run("test", "-p 80:80") 
+                    docker.image('test').run('-p 80:80')
                 }
             }
         }
