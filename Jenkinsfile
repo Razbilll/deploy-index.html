@@ -15,7 +15,7 @@ def myMethod() {
                 steps {
                     script {
                         // Запуск контейнера
-                        docker.run("test", "-p 8080:80")
+                        docker.run("test", "-p 80:80")
                     }
                 }
             }
