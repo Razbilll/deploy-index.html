@@ -1,22 +1,18 @@
 @NonCPS
-def myMethod() {
-    pipeline {
-        agent any
-
-        stages {
-            stage('Build Docker Image') {
-                steps {
-                    script {
-                        def image = docker.build("test")
-                    }
+pipeline {
+    agent any
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    def image = docker.build("test")
                 }
             }
-            stage('Run Docker Container') {
-                steps {
-                    script {
-                        // Запуск контейнера
-                        docker.run("test", "-p 80:80")
-                    }
+        }
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    docker.run("test", "-p 80:80") 
                 }
             }
         }
