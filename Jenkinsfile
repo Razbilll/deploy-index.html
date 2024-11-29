@@ -1,35 +1,19 @@
 pipeline {
     agent any
 
-    environment {
-        VERSION_TAG = '1.0.' // Переменная для хранения тега версии
-    }
-
     stages {
-        stage('Set Version Tag') {
+        stage('Build Docker Image ') {
             steps {
                 script {
-                    // Устанавливаем тег версии на основе номера сборки
-                    env.VERSION_TAG = "1.0.${env.BUILD_NUMBER}" // Формируем версию
-                    echo "Текущий тег версии: ${env.VERSION_TAG}"
-                }
-                env.VERSION_TAG = env.VERSION_TAG // Update the environment variable
-            }
-        }
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    // Строим Docker образ с тегом версии
-                    def image = docker.build("test:${env.VERSION_TAG}")
+                    def image = docker.build("test:${env.BUILD_NUMBER}")
                 }
             }
         }
-
         stage('Run Docker Container') {
             steps {
                 script {
-                    // Запускаем Docker контейнер с указанным тегом
-                    docker.image("test:${env.VERSION_TAG}").run('-p 80:80')
+                    // Запускаем Docker контейнер на порту 80
+                    docker.image("test:${env.BUILD_NUMBER}").run('-p 80:80')
                 }
             }
         }
