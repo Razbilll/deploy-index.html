@@ -6,14 +6,12 @@ pipeline {
     }
 
     stages {
-        stages {
-            stage('Set Version Tag') {
-                steps {
-                    script {
-                        // Устанавливаем тег версии на основе номера сборки
-                        env.VERSION_TAG = "1.0.${env.BUILD_NUMBER}" // Формируем версию
-                        echo "Текущий тег версии: ${env.VERSION_TAG}"
-                    }
+        stage('Set Version Tag') {
+            steps {
+                script {
+                    // Устанавливаем тег версии на основе номера сборки
+                    env.VERSION_TAG = "1.0.${env.BUILD_NUMBER}" // Формируем версию
+                    echo "Текущий тег версии: ${env.VERSION_TAG}"
                 }
             }
         }
