@@ -13,7 +13,7 @@ pipeline {
                     env.VERSION_TAG = "1.0.${env.BUILD_NUMBER}" // Формируем версию
                     echo "Текущий тег версии: ${env.VERSION_TAG}"
                 }
-            env.VERSION_TAG = env.VERSION_TAG // Update the environment variable
+                env.VERSION_TAG = env.VERSION_TAG // Update the environment variable
             }
         }
         stage('Build Docker Image') {
