@@ -2,6 +2,22 @@ pipeline {
     agent any
 
     stages {
+        stage('Stop and Remove Existing Container') {
+            steps {
+                script {
+                    // Останавливаем и удаляем существующий контейнер, если он запущен
+                    def containerName = "test:1.0.${env.BUILD_NUMBER - 1}" // Имя контейнера
+                    try {
+                        // Останавливаем контейнер
+                        sh "docker stop ${containerName} || true"
+                        // Удаляем контейнер
+                        sh "docker rm ${containerName} || true"
+                    } catch (Exception e) {
+                        echo "Контейнер не найден или не может быть остановлен/удален: ${e}"
+                    }
+                }
+            }
+        }
         stage('Build Docker Image ') {
             steps {
                 script {
