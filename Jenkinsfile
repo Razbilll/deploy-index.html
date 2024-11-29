@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        VERSION_TAG = '1' // Переменная для хранения тега версии
+        VERSION_TAG = '1.0.1' // Переменная для хранения тега версии
     }
 
     stages {
