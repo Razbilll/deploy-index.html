@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Останавливаем и удаляем существующий контейнер, если он запущен
-                    def containerName = "test:1.0.${env.BUILD_NUMBER - 1}" // Имя контейнера
+                    def containerName = "test:${env.BUILD_NUMBER - 1}" // Имя контейнера
                     try {
                         // Останавливаем контейнер
                         sh "docker stop ${containerName} || true"
