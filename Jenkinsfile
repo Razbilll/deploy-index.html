@@ -5,8 +5,12 @@ pipeline {
         stage('Stop and Remove Existing Container') {
             steps {
                 script {
+                    // Вычисляем тег на 1 меньше
+                    def previousBuildNumber = env.BUILD_NUMBER.toInteger() - 1
+                    def previousTag = "test:1.0.${previousBuildNumber}" // Формируем тег
+        
                     // Получаем ID контейнера по тегу образа
-                    def containerId = sh(script: "docker ps -q --filter 'ancestor=test:1.0.${env.BUILD_NUMBER} - 1'", returnStdout: true).trim()
+                    def containerId = sh(script: "docker ps -q --filter 'ancestor=${previousTag}'", returnStdout: true).trim()
                     
                     if (containerId) {
                         try {
