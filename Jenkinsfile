@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Получаем ID контейнера по тегу образа
-                    def containerId = sh(script: "docker ps -q --filter 'ancestor=test:1.0.${env.BUILD_NUMBER - 1}'", returnStdout: true).trim()
+                    def containerId = sh(script: "docker ps -q --filter 'ancestor=test:1.0.${env.BUILD_NUMBER - '1'}'", returnStdout: true).trim()
                     
                     if (containerId) {
                         try {
